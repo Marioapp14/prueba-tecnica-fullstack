@@ -61,7 +61,7 @@ Aplicación web fullstack para la gestión de **productos, categorías y proveed
 ###  1. Clonar repositorio
 
 ```bash
-git clone <TU_REPOSITORIO>
+git clone 
 cd backend
 ```
 
