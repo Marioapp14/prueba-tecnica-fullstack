@@ -1,0 +1,39 @@
+version: "3.8"
+
+# 🔗 Red personalizada
+networks:
+  productos-network:
+    driver: bridge
+
+services:
+
+  # 🐘 Base de datos PostgreSQL
+  postgres:
+    image: postgres:15
+    container_name: db_productos
+    restart: always
+    environment:
+      POSTGRES_DB: productos_db
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./postgres-data:/var/lib/postgresql/data
+    networks:
+      - productos-network
+
+  # 🛠️ Administrador de BD (pgAdmin)
+  pgadmin:
+    image: dpage/pgadmin4
+    container_name: pgadmin_productos
+    restart: always
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@mail.com
+      PGADMIN_DEFAULT_PASSWORD: admin
+    ports:
+      - "5050:80"
+    depends_on:
+      - postgres
+    networks:
+      - productos-network
